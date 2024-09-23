@@ -1,0 +1,35 @@
+version: "3.9"
+
+networks:
+  4guard-network:
+    driver: bridge
+    name: "4guard-network"
+
+services:
+  api-gps:
+    container_name: 4guard-api
+    image: dersoncarlos/4guard-api:dev
+    restart: always
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      MONGO_DB_URL: ${MONGO_DB_URL}
+      MONGO_DB_USER: ${MONGO_DB_USER}
+      MONGO_DB_PASS: ${MONGO_DB_PASS}
+      MAIL_AUTH_USER: ${MAIL_AUTH_USER}
+      MAIL_AUTH_PASS: ${MAIL_AUTH_PASS}
+      MAIL_HOST: ${MAIL_HOST}
+      MAIL_PORT: ${MAIL_PORT}
+      MAIL_FROM: ${MAIL_FROM}
+      MAIL_TO: ${MAIL_TO}
+      MAIL_DELAY_MS: ${MAIL_DELAY_MS}
+      APP_PORT: ${APP_PORT}
+      API_USERNAME: ${API_USERNAME}
+      API_HASH_PASS: ${API_HASH_PASS}
+      JWT_SECRET: ${JWT_SECRET}
+      API_CORE_URL: ${API_CORE_URL}
+      API_CORE_MAPS_SALT: ${API_CORE_MAPS_SALT}
+      SENTRY_DSN: ${SENTRY_DSN}
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    networks:
+      - 4guard-network
